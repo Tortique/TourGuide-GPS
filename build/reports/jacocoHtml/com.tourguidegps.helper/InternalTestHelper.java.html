@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InternalTestHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TourGuide-GPS</a> &gt; <a href="index.source.html" class="el_package">com.tourguidegps.helper</a> &gt; <span class="el_source">InternalTestHelper.java</span></div><h1>InternalTestHelper.java</h1><pre class="source lang-java linenums">package com.tourguidegps.helper;
+
+import com.tourguidegps.domain.User;
+import com.tourguidegps.domain.location.Location;
+import com.tourguidegps.domain.location.VisitedLocation;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+<span class="nc" id="L13">public class InternalTestHelper {</span>
+
+	// Set this default up to 100,000 for testing
+<span class="nc" id="L16">	private static int internalUserNumber = 100;</span>
+	
+	public static void setInternalUserNumber(int internalUserNumber) {
+<span class="nc" id="L19">		InternalTestHelper.internalUserNumber = internalUserNumber;</span>
+<span class="nc" id="L20">	}</span>
+	
+	public static int getInternalUserNumber() {
+<span class="nc" id="L23">		return internalUserNumber;</span>
+	}
+
+<span class="nc" id="L26">	private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
+
+	private void initializeInternalUsers() {
+<span class="nc" id="L29">		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
+<span class="nc" id="L30">			String userName = &quot;internalUser&quot; + i;</span>
+<span class="nc" id="L31">			String phone = &quot;000&quot;;</span>
+<span class="nc" id="L32">			String email = userName + &quot;@tourGuide.com&quot;;</span>
+<span class="nc" id="L33">			User user = new User(UUID.randomUUID(), userName, phone, email);</span>
+<span class="nc" id="L34">			generateUserLocationHistory(user);</span>
+
+<span class="nc" id="L36">			internalUserMap.put(userName, user);</span>
+<span class="nc" id="L37">		});</span>
+<span class="nc" id="L38">	}</span>
+
+	private void generateUserLocationHistory(User user) {
+<span class="nc" id="L41">		IntStream.range(0, 1).forEach(i -&gt; user.addToVisitedLocations(new VisitedLocation(user.getUserId(),</span>
+<span class="nc" id="L42">				new Location(generateRandomLatitude(), generateRandomLongitude()), getRandomTime())));</span>
+<span class="nc" id="L43">	}</span>
+
+	private double generateRandomLongitude() {
+<span class="nc" id="L46">		double leftLimit = -180;</span>
+<span class="nc" id="L47">		double rightLimit = 180;</span>
+<span class="nc" id="L48">		return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);</span>
+	}
+
+	private double generateRandomLatitude() {
+<span class="nc" id="L52">		double leftLimit = -85.05112878;</span>
+<span class="nc" id="L53">		double rightLimit = 85.05112878;</span>
+<span class="nc" id="L54">		return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);</span>
+	}
+
+	private Date getRandomTime() {
+<span class="nc" id="L58">		LocalDateTime localDateTime = LocalDateTime.now().minusDays(new Random().nextInt(30));</span>
+<span class="nc" id="L59">		return Date.from(localDateTime.toInstant(ZoneOffset.UTC));</span>
+	}
+
+	public User getUser(String userName) {
+<span class="nc" id="L63">		return internalUserMap.get(userName);</span>
+	}
+
+	public List&lt;User&gt; getAllUsers() {
+<span class="nc" id="L67">		return internalUserMap.values().parallelStream().collect(Collectors.toList());</span>
+	}
+
+	public void addUser(User user) {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">		if (!internalUserMap.containsKey(user.getUserName())) {</span>
+<span class="nc" id="L72">			internalUserMap.put(user.getUserName(), user);</span>
+		}
+<span class="nc" id="L74">	}</span>
+
+	public void initializeTheInternalUsers() {
+<span class="nc" id="L77">		initializeInternalUsers();</span>
+<span class="nc" id="L78">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

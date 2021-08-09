@@ -1,0 +1,32 @@
+com/tourguidegps/exceptions/InvalidLocationException.java
+ com.tourguidegps.exceptions.InvalidLocationException
+com/tourguidegps/domain/location/VisitedLocation.java
+ com.tourguidegps.domain.location.VisitedLocation
+com/tourguidegps/domain/UserPreferences.java
+ com.tourguidegps.domain.UserPreferences
+com/tourguidegps/TourGuideModule.java
+ com.tourguidegps.TourGuideModule
+com/tourguidegps/util/GetDistance.java
+ com.tourguidegps.util.GetDistance
+com/tourguidegps/util/GpsUtil.java
+ com.tourguidegps.util.GpsUtil
+com/tourguidegps/domain/NearByAttraction.java
+ com.tourguidegps.domain.NearByAttraction
+com/tourguidegps/GpsApplication.java
+ com.tourguidegps.GpsApplication
+com/tourguidegps/domain/location/Attraction.java
+ com.tourguidegps.domain.location.Attraction
+com/tourguidegps/domain/User.java
+ com.tourguidegps.domain.User
+com/tourguidegps/helper/InternalTestHelper.java
+ com.tourguidegps.helper.InternalTestHelper
+com/tourguidegps/domain/UserReward.java
+ com.tourguidegps.domain.UserReward
+com/tourguidegps/domain/location/Location.java
+ com.tourguidegps.domain.location.Location
+com/tourguidegps/controller/GpsController.java
+ com.tourguidegps.controller.GpsController
+com/tourguidegps/service/GpsService.java
+ com.tourguidegps.service.GpsService
+com/tourguidegps/service/feignClient/RewardFeignClient.java
+ com.tourguidegps.service.feignClient.RewardFeignClient
